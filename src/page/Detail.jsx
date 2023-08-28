@@ -3,8 +3,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-
 import { useParams } from 'react-router-dom';
+import { styled } from 'styled-components';
+
+
+
 
 
 const Detail = (props) => {
@@ -17,6 +20,7 @@ const Detail = (props) => {
 
   return (
       <Container>
+        
       <Row>
         <Col className='md-6'>
         <img src={`https://codingapple1.github.io/shop/shoes${selectedShoe.id+1}.jpg`} width="100%" /></Col>
