@@ -41,7 +41,7 @@ function App() {
           <Navbar.Brand href="/">Apple Shop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="about">Cart</Nav.Link>
+            <Nav.Link href="about">Cart1</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
