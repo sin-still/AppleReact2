@@ -32,6 +32,8 @@ class Detail2 extends React.Component{
 
 
 const Detail = (props) => {
+  
+  
   const { id } = useParams();
   const selectedShoe = props.shoes.find(shoes => shoes.id === parseInt(id));
   const [showAlert, setShowAlert] = useState(true);

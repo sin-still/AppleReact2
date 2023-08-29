@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar , Container , Nav , Row , Col } from 'react-bootstrap';
 import data from '../data';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 const MainShoes = (props) => {
@@ -12,6 +13,8 @@ const MainShoes = (props) => {
                <h4>{props.shoes.title}</h4>
                <p>{props.shoes.price}</p>
                <p>상품설명</p>
+                  
+               
         </Col>
    );
 };

@@ -1,17 +1,38 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navbar , Container , Nav , Row , Col } from 'react-bootstrap';
 import { Routes ,Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Main from './page/Main';
 import Detail from './page/Detail';
 import data from './data';
+import axios from 'axios';
 
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
+  let [newShoes, setNewShoes] = useState()
 
+  const handleButtonClick = () => {
+    axios.get('https://codingapple1.github.io/shop/data2.json')
+      .then((response) => {
+        if (response.data) {
+          const updatedShoes = [...shoes, ...response.data];
+          setShoes(updatedShoes);
+        }
+      })
+      .catch(error => {
+        console.error("데이터를 불러오는 중 오류 발생:", error);
+      });
+  };
 
+  useEffect(() => {
+    if (newShoes && newShoes.length > 0) {
+      const updatedShoes = [...shoes, ...newShoes];
+      setShoes(updatedShoes);
+      console.log("Updated shoes:", updatedShoes);
+    }
+  }, [newShoes, shoes]);
   return (
     <div className="App">
       
@@ -32,6 +53,7 @@ function App() {
 
       <Routes>
         <Route path='/' element ={<Main shoes={shoes}/>}/>
+
         <Route path='/detail/:id' element ={<Detail shoes={shoes} />} />
         <Route path='/about' element ={<About/>}>
           <Route path='member' element ={<div>멤버쓰</div>} />
@@ -52,6 +74,7 @@ function App() {
 
         <Route path='*' element ={<div>없는 페이지 입니다.</div>}/>
       </Routes>
+      <button onClick={handleButtonClick}>버튼</button>
 
       
       
