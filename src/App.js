@@ -24,15 +24,20 @@ function App() {
       .catch(error => {
         console.error("데이터를 불러오는 중 오류 발생:", error);
       });
+
+    /* axios.post('/', {name : 'kim'}) */
   };
 
-  useEffect(() => {
-    if (newShoes && newShoes.length > 0) {
-      const updatedShoes = [...shoes, ...newShoes];
-      setShoes(updatedShoes);
-      console.log("Updated shoes:", updatedShoes);
-    }
-  }, [newShoes, shoes]);
+
+  /* 
+  axios를 2개 요청할 경우
+  Promise.all([ axios.get('url1'),axios.get('url2') ])
+  .then()
+  */
+
+  
+
+  
   return (
     <div className="App">
       
