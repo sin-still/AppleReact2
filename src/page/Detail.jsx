@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,6 +6,9 @@ import Button from 'react-bootstrap/Button';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
+
+
+
 
 
 //컴포넌트의 Lifecycle
@@ -33,7 +36,14 @@ class Detail2 extends React.Component{
 
 
 const Detail = (props) => {
-  
+ /*  
+ let {재고} = useContext(Context1)
+ //객체 분해 할당
+ let a = useContext(Context1)
+ //변수할당
+ console.log(재고)
+ console.log(a)
+  */
   
   const { id } = useParams();
   const selectedShoe = props.shoes.find(shoes => shoes.id === parseInt(id));
@@ -110,12 +120,12 @@ const Detail = (props) => {
           <Nav.Link eventKey='link2' onClick={() => setTab(2)}>버튼 2</Nav.Link>
         </Nav.Item>
       </Nav>
-      <Tabcontent tab={tab} />
+      <Tabcontent tab={tab} shoes={props.shoes} selectedShoe={selectedShoe} />
     </Container>
    );
 };
 
-function Tabcontent ({tab}){
+function Tabcontent ({tab, shoes, selectedShoe}){
   
     /* if (tab == 0) {
       return <div>내용1</div>
@@ -127,7 +137,7 @@ function Tabcontent ({tab}){
       return  <div>내용3</div>
     }
     return null;  */
-    /* return [<div>내용1</div>,<div>내용2</div>,<div>내용3</div>][tab] */
+    {/* <div className={`start ${fade}`}>내용{tab+1}</div> */}
 
     const [fade, setFade] = useState('');
     useEffect(()=>{
@@ -139,7 +149,11 @@ function Tabcontent ({tab}){
       }
     },[tab])
 
-    return <div className={`start ${fade}`}>내용{tab+1}</div>
+    return (
+      [<div>{shoes[selectedShoe.id].title}</div>,<div>{shoes[selectedShoe.id].price}</div>,<div>{shoes[selectedShoe.id].content}</div>][tab]
+      
+    )
+
 }
 
 //react 18ver 이상부턴 automatic batching 이란 기능이 생겨 가까운 경우 한번에 실행이 되기 때문에 약간의 시간차를 주어 해야함

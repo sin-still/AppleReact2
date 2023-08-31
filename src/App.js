@@ -1,17 +1,23 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { Navbar , Container , Nav , Row , Col } from 'react-bootstrap';
 import { Routes ,Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Main from './page/Main';
 import Detail from './page/Detail';
 import data from './data';
 import axios from 'axios';
+import Cart from './page/Cart';
+
+//스테이트 보관함
+
+
 
 
 function App() {
   let [shoes, setShoes] = useState(data);
   let [newShoes, setNewShoes] = useState()
+  
 
   const handleButtonClick = () => {
     axios.get('https://codingapple1.github.io/shop/data2.json')
@@ -58,12 +64,13 @@ function App() {
 
       <Routes>
         <Route path='/' element ={<Main shoes={shoes}/>}/>
-
-        <Route path='/detail/:id' element ={<Detail shoes={shoes} />} />
+        <Route path='/detail/:id' element ={<Detail shoes={shoes}/>}/>
         <Route path='/about' element ={<About/>}>
           <Route path='member' element ={<div>멤버쓰</div>} />
           <Route path='location' element ={<div>위치정보쓰</div>} />
         </Route>
+        
+        <Route path='/cart' element={<Cart />} />
 
 
         <Route path='/event' element ={<Event/>}>
