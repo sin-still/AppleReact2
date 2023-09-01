@@ -7,47 +7,65 @@ createSlice({
  */
 let user = createSlice({
    name: 'user',
-   initialState: 'lee',
+   initialState: {name : 'lee', age: 20 },
 
    reducers: {
       changeName( state /* 기존스테이트 */){
-         return 'sinchul ' + state
-      }
+         /* return { name : 'park', age: 20 } */
+         return state.name = 'park'
+      },
+      increase( state, a) {
+         state.age += a.payload
+      },
    }
 
 })
 //객체분해 할당
-export let { changeName } = user.actions;
+export let { changeName, increase } = user.actions;
 
-
+///////////////////////////////////////////////////////////////////
 let stock = createSlice({
    name: 'stock',
    initialState: [10, 11, 12]
 })
-
+///////////////////////////////////////////////////////////////////////
 let cartData = createSlice({
    name: 'cartData',
    initialState: [
-      {id : 0, name: 'White and Black', count : 2 },
-      {id : 2, name: 'Grey Yordan', count : 1 },
+      {id : 0, name: 'White and Black', count : 2, price : 120000 },
+      {id : 2, name: 'Grey Yordan', count : 1, price : 130000 },
    ],
 
    reducers : {
       moreCount(state, action){
          const itemId = action.payload;
-         const itemIndex = state.findIndex( item => item.id === itemId );
+         const itemIndex = state.findIndex( item => item.id === itemId ); 
 
-         if ( itemIndex !== -1 ) {
-            state[itemIndex].count += 1;
-         }
+         state[itemIndex].count++
+      },
+      /* addDataA(state, action){
+         
+         state.push(action.payload)
+         console.log(cartData)
+         
+         
+      }, */
+      addData(state, action){
+         const selectData = action.payload;
+         console.log(selectData)
+         const copy = [...state]
+         copy.push(selectData)
+         console.log(copy)
+         return  copy
+         
       }
    }
 })
 
-export let { moreCount } = cartData.actions;
+export let { moreCount, addData } = cartData.actions;
 
 
-
+////////////////////////////////////////////////////
 
 export default configureStore({
    reducer: {

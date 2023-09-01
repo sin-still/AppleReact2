@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
+import { useDispatch } from 'react-redux';
+import { addData } from '../store';
 
 
 
@@ -53,6 +55,7 @@ const Detail = (props) => {
   const [ count , setCount ] =useState();
   const [ tab , setTab ] =useState(0);
   const [fade, setFade] = useState('');
+  const dispatch = useDispatch();
 
   //서버에서 데이터 가져오는 작업 , 타이머를 장착하는것 같은 오래걸리는 작업을 유즈이펙트에 넣어 작업한다.
 
@@ -107,6 +110,9 @@ const Detail = (props) => {
          <p>{selectedShoe.content}</p>
          <p>{selectedShoe.price}</p>
          <Button variant="light">주문하기</Button>
+         <Button variant='light' onClick={()=>{
+           dispatch(addData( {id : 5, name: 'Grey Yordan', count : 1, price : 130000 } )) 
+           }}> 추가하기 </Button>
         </Col>
       </Row>
       <Nav variant='tabs' defaultActiveKey='link0'>
